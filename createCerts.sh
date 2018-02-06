@@ -30,7 +30,7 @@ createServer(){
     do
         if [ -x "$(which dig)" ]
         then
-            IP=$(dig +nocookie +short $server)
+            IP=$(dig +nocookie +short $server 2>/dev/null || dig +short $server)
             if [ -z "$IP" ]; then
                 IP="127.0.0.1"
             fi
@@ -62,7 +62,7 @@ createMultiServer() {
 
     for server in "$@"
     do
-        IP=$(dig +nocookie +short $server)
+        IP=$(dig +nocookie +short $server 2>/dev/null || dig +short $server)
         if [ -n "$IP" ]; then
             ips="$ips,IP:$IP"
         fi
