@@ -5,7 +5,7 @@ echo "Working in $caname"
 print_help(){
     echo "./createCerts.sh server <srv1-fqdn> <srv2-fqdn> ..."
     echo "./createCerts.sh multi  <certname> <srv1-fqdn> <srv2-fqdn> ..."
-    echo "./createCerts.sh client <client-name>"
+    echo "./createCerts.sh client [--with-pfx] <client-name>"
 }
 
 getSubject(){
@@ -85,6 +85,12 @@ createMultiServer() {
 createClient(){
 
     unset SAN
+
+    if [[ "$1" == "--with-pfx" ]]; then
+        shift
+        PFX="true"
+    fi
+
     client="$1"
     openssl req -config openssl.cnf -new -nodes \
         -keyout private/client-$client.key -out reqs/client-$client.csr
@@ -93,6 +99,24 @@ createClient(){
         -keyfile private/ca.key \
         -cert certs/ca.crt \
         -out certs/client-$client.crt -infiles reqs/client-$client.csr
+
+    if [ "$PFXPASSWORD" != "true"  ]
+    then
+        echo "Variable PFXPASSWORD is not set. PFX will have an empty export password."
+        echo "If you want to protect your PFX file, set PFXPASSWORD to 'true'."
+        read -p "Ctrl-C to abort." abort
+        USEPASSWORD="-passout pass:"
+    else
+        USEPASSWORD=""
+    fi
+
+    if [[ "$PFX" == "true" ]]; then
+        openssl pkcs12 -export \
+        -in certs/client-$client.crt \
+        -inkey private/client-$client.key \
+        -out certs/client-$client.pfx \
+        $USEPASSWORD
+    fi
 }
 
 
