@@ -5,7 +5,7 @@ echo "Working in $caname"
 print_help(){
     echo "./createCerts.sh server <srv1-fqdn> <srv2-fqdn> ..."
     echo "./createCerts.sh multi  <certname> <srv1-fqdn> <srv2-fqdn> ..."
-    echo "./createCerts.sh client [--with-pfx] <client-name>"
+    echo "./createCerts.sh client [with-pfx] <client-name>"
 }
 
 getSubject(){
@@ -86,7 +86,7 @@ createClient(){
 
     unset SAN
 
-    if [[ "$1" == "--with-pfx" ]]; then
+    if [[ "$1" == "with-pfx" ]]; then
         shift
         PFX="true"
     fi
