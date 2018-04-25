@@ -100,8 +100,9 @@ createClient(){
         -cert certs/ca.crt \
         -out certs/client-$client.crt -infiles reqs/client-$client.csr
 
-    if [ "$PFXPASSWORD" != "true"  ]
+    if [[ "$PFX" == "true" && "$PFXPASSWORD" != "true" ]]
     then
+        echo
         echo "Variable PFXPASSWORD is not set. PFX will have an empty export password."
         echo "If you want to protect your PFX file, set PFXPASSWORD to 'true'."
         read -p "Ctrl-C to abort." abort
