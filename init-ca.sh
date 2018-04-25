@@ -38,4 +38,3 @@ echo '01' > crlnumber
 openssl req -config openssl.cnf \
     -new -x509 -extensions v3_ca -days 3650 \
     -newkey rsa:4096 $USEPASSWORD -keyout private/ca.key -out certs/ca.crt
-

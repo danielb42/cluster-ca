@@ -16,6 +16,4 @@ Done.
 
 Use "server" followed by a list of hostnames to create multiple certs, one for every listed hostname.  
 Use "multi" followed by the name of the cert and a list of hostnames to create a cert which contains the listed hosts in SAN.  
-Use "client" followed by a username to create a user cert. Optionally precede name with `with-pfx` to generate a PFX file. 
-
-
+Use "client" followed by a username to create a user cert. Optionally precede name with `with-pfx` to generate a PFX file.

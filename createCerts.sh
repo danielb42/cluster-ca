@@ -136,7 +136,7 @@ case "$1" in
             shift
             createMultiServer $@
             ;;
-    
+
          *) print_help
             exit 1
             ;;

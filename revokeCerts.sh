@@ -22,6 +22,6 @@ cat certs/ca.crt crl.list.pem > crl_chain.pem
 echo
 for i in "$@"; do
     echo "Verifing $i"
-    openssl verify -crl_check -CAfile crl_chain.pem $i 
-    echo 
+    openssl verify -crl_check -CAfile crl_chain.pem $i
+    echo
 done
