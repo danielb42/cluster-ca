@@ -47,7 +47,6 @@ string_mask        = utf8only
 
 [ req_distinguished_name ]
 countryName                = Country Name (2 letter code)
-countryName_default        = XX
 countryName_min            = 2
 countryName_max            = 2
 commonName                 = Common Name (e.g. FQDN) 
